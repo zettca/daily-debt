@@ -4,5 +4,5 @@ export interface GoalItem {
 }
 
 export interface DailyGoalItem extends GoalItem {
-  completed: boolean;
+  completedDates: string[]; // Array of ISO date strings (YYYY-MM-DD)
 }
