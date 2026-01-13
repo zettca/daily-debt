@@ -2,7 +2,7 @@ import { orange } from "@mui/material/colors";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { ChecklistCard } from "./components/checklist-card";
+import { ChecklistCard } from "./components/home";
 import { ModeToggle } from "./components/mode-toggle";
 
 const muiTheme = createTheme({

@@ -6,7 +6,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import confetti from "canvas-confetti";
 import { useLocalStorage } from "usehooks-ts";
 import type { DailyGoalItem } from "../types";
-import { ConfigureDialog } from "./configure-dialog";
+import { ConfigureDialog } from "./settings";
 
 const defaultTodos: DailyGoalItem[] = [
   { id: 1, text: "Review pull requests", completed: false },
