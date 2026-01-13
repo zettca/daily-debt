@@ -1,6 +1,9 @@
-import { Monitor, Moon, Sun } from "lucide-react";
-import { useTheme } from "@/components/theme-provider";
-import { Button } from "@/components/ui/button";
+import ComputerIcon from "@mui/icons-material/Computer";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import IconButton from "@mui/material/IconButton";
+import { useColorScheme } from "@mui/material/styles";
+import Tooltip from "@mui/material/Tooltip";
 
 const getNextTheme = (current: string) => {
   if (current === "system") return "light";
@@ -9,18 +12,15 @@ const getNextTheme = (current: string) => {
 };
 
 export function ModeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { mode, setMode } = useColorScheme();
 
   return (
-    <Button
-      variant="outline"
-      size="icon"
-      aria-label={`${theme} mode`}
-      onClick={() => setTheme(getNextTheme(theme))}
-    >
-      {theme === "light" && <Sun className="size-5" />}
-      {theme === "dark" && <Moon className="size-5" />}
-      {theme === "system" && <Monitor className="size-5" />}
-    </Button>
+    <Tooltip title={`${mode} mode`}>
+      <IconButton onClick={() => setMode(getNextTheme(mode || "system"))}>
+        {mode === "light" && <LightModeIcon />}
+        {mode === "dark" && <DarkModeIcon />}
+        {mode === "system" && <ComputerIcon />}
+      </IconButton>
+    </Tooltip>
   );
 }

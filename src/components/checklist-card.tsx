@@ -1,9 +1,11 @@
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import confetti from "canvas-confetti";
-import clsx from "clsx";
 import { useLocalStorage } from "usehooks-ts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import type { DailyGoalItem } from "@/types";
+import type { DailyGoalItem } from "../types";
 import { ConfigureDialog } from "./configure-dialog";
 
 const defaultTodos: DailyGoalItem[] = [
@@ -37,36 +39,30 @@ export function ChecklistCard() {
 
   return (
     <Card className="w-full max-w-md">
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle>Daily Goals</CardTitle>
+      <CardHeader
+        title="Daily Goals"
+        action={
           <ConfigureDialog
             initialTodos={todos}
             onSave={(newTodos) => {
               setTodos(newTodos.map((todo) => ({ ...todo, completed: false })));
             }}
           />
-        </div>
-      </CardHeader>
+        }
+      />
       <CardContent>
         <div className="grid gap-1 text-lg">
           {sortedTodos.map((todo) => (
-            <label
+            <FormControlLabel
               key={todo.id}
-              className="flex items-center gap-2 p-2 rounded-lg [&:hover,&:focus-within]:bg-primary/20 cursor-pointer"
-            >
-              <Checkbox
-                checked={todo.completed}
-                onCheckedChange={() => toggleTodo(todo.id)}
-              />
-              <span
-                className={clsx("flex-1", {
-                  "opacity-40 line-through": todo.completed,
-                })}
-              >
-                {todo.text}
-              </span>
-            </label>
+              control={
+                <Checkbox
+                  checked={todo.completed}
+                  onChange={() => toggleTodo(todo.id)}
+                />
+              }
+              label={todo.text}
+            />
           ))}
         </div>
       </CardContent>

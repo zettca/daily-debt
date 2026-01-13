@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { Plus, Settings, Trash2 } from "lucide-react";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import type { GoalItem } from "@/types";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
+import SettingsIcon from "@mui/icons-material/Settings";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import type { GoalItem } from "../types";
 
 export interface ConfigureDialogProps {
   initialTodos: GoalItem[];
@@ -52,47 +51,51 @@ export function ConfigureDialog({
   };
 
   const handleUpdateTodo = (id: number, text: string) => {
-    setEditingTodos(
-      editingTodos.map((todo) => (todo.id === id ? { ...todo, text } : todo)),
+    setEditingTodos((todos) =>
+      todos.map((todo) => (todo.id === id ? { ...todo, text } : todo)),
     );
   };
 
   return (
-    <AlertDialog open={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger
-        onClick={handleOpenDialog}
-        render={
-          <Button variant="outline" size="icon">
-            <Settings className="size-5" />
-          </Button>
-        }
-      />
-      <AlertDialogContent className="sm:max-w-lg">
-        <AlertDialogHeader>
-          <AlertDialogTitle>Configure Daily Goals</AlertDialogTitle>
-          <AlertDialogDescription>
+    <>
+      <IconButton onClick={handleOpenDialog} size="small">
+        <SettingsIcon />
+      </IconButton>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>
+          <Typography variant="h6" component="div">
+            Configure Daily Goals
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
             Add, remove, or rename your daily goals.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <div className="grid gap-2">
+          </Typography>
+        </DialogTitle>
+        <DialogContent className="grid gap-2">
           {editingTodos.map((todo) => (
-            <div key={todo.id} className="flex items-center gap-2">
-              <Input
+            <div key={todo.id} className="flex items-center gap-1">
+              <TextField
+                fullWidth
+                size="small"
                 value={todo.text}
                 onChange={(e) => handleUpdateTodo(todo.id, e.target.value)}
-                className="flex-1"
               />
-              <Button
-                variant="ghost"
-                size="icon"
+              <IconButton
                 onClick={() => handleRemoveTodo(todo.id)}
+                size="small"
               >
-                <Trash2 className="size-4" />
-              </Button>
+                <DeleteIcon />
+              </IconButton>
             </div>
           ))}
-          <div className="flex items-center gap-2">
-            <Input
+          <div className="flex items-center gap-1">
+            <TextField
+              fullWidth
+              size="small"
               placeholder="Enter new goal..."
               value={newTodoText}
               onChange={(e) => setNewTodoText(e.target.value)}
@@ -101,20 +104,21 @@ export function ConfigureDialog({
                   handleAddTodo();
                 }
               }}
-              className="flex-1"
             />
-            <Button onClick={handleAddTodo} size="icon" variant="default">
-              <Plus className="size-4" />
-            </Button>
+            <IconButton onClick={handleAddTodo} color="primary" size="small">
+              <AddIcon />
+            </IconButton>
           </div>
-        </div>
-        <AlertDialogFooter>
-          <Button variant="outline" onClick={() => setOpen(false)}>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)} variant="outlined">
             Cancel
           </Button>
-          <Button onClick={handleSave}>Save</Button>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+          <Button onClick={handleSave} variant="contained">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }
