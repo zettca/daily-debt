@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -94,7 +93,7 @@ export function ChecklistCard() {
 
   return (
     <div className="w-full">
-      <Box className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4">
         <Typography variant="h4" component="h1">
           Daily Goals
         </Typography>
@@ -110,7 +109,7 @@ export function ChecklistCard() {
             );
           }}
         />
-      </Box>
+      </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {sortedTodos.map((goal) => {
           const isCompletedToday = goal.completedDates.includes(today);
