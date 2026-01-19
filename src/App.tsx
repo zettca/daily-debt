@@ -27,7 +27,7 @@ export function App() {
       <CssBaseline />
       <Container
         maxWidth="lg"
-        className="min-h-screen flex items-center justify-center"
+        className="min-h-[100dvh] flex items-center justify-center"
       >
         <ChecklistCard />
         <div className="absolute top-4 right-4">
