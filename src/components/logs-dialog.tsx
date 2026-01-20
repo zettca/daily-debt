@@ -89,7 +89,7 @@ export function LogsDialog({ todos }: LogsDialogProps) {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)} variant="contained">
+          <Button onClick={() => setOpen(false)} variant="outlined">
             Close
           </Button>
         </DialogActions>

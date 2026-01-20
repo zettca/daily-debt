@@ -77,7 +77,7 @@ export function ConfigureDialog({
             Add, remove, or rename your daily goals.
           </Typography>
         </DialogTitle>
-        <DialogContent className="grid gap-2">
+        <DialogContent className="grid gap-2 overflow-visible">
           {editingTodos.map((todo) => (
             <div key={todo.id} className="flex items-center gap-1">
               <TextField

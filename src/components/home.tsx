@@ -93,7 +93,7 @@ export function ChecklistCard() {
   });
 
   return (
-    <main>
+    <main className="w-full">
       <div className="flex justify-between items-center mb-4">
         <Typography variant="h4" component="h1">
           Daily Goals
