@@ -8,7 +8,8 @@ import Typography from "@mui/material/Typography";
 import confetti from "canvas-confetti";
 import { useLocalStorage } from "usehooks-ts";
 import type { DailyGoalItem } from "../types";
-import { ConfigureDialog } from "./settings";
+import { LogsDialog } from "./logs-dialog";
+import { ConfigureDialog } from "./settings-dialog";
 
 const defaultTodos: DailyGoalItem[] = [
   { id: 1, text: "Review pull requests", completedDates: [] },
@@ -97,18 +98,21 @@ export function ChecklistCard() {
         <Typography variant="h4" component="h1">
           Daily Goals
         </Typography>
-        <ConfigureDialog
-          initialTodos={todos}
-          onSave={(newTodos) => {
-            setTodos(
-              newTodos.map((todo) => ({
-                ...todo,
-                completedDates:
-                  todos.find((t) => t.id === todo.id)?.completedDates || [],
-              })),
-            );
-          }}
-        />
+        <div className="flex gap-2">
+          <LogsDialog todos={todos} />
+          <ConfigureDialog
+            initialTodos={todos}
+            onSave={(newTodos) => {
+              setTodos(
+                newTodos.map((todo) => ({
+                  ...todo,
+                  completedDates:
+                    todos.find((t) => t.id === todo.id)?.completedDates || [],
+                })),
+              );
+            }}
+          />
+        </div>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {sortedTodos.map((goal) => {

@@ -2,14 +2,16 @@ import { useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SettingsIcon from "@mui/icons-material/Settings";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import IconButton from "@mui/material/IconButton";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  TextField,
+  Typography,
+} from "@mui/material";
 import type { GoalItem } from "../types";
 
 export interface ConfigureDialogProps {
@@ -58,7 +60,7 @@ export function ConfigureDialog({
 
   return (
     <>
-      <IconButton onClick={handleOpenDialog} size="small">
+      <IconButton onClick={handleOpenDialog}>
         <SettingsIcon />
       </IconButton>
       <Dialog
