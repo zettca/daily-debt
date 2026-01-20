@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import confetti from "canvas-confetti";
 import { useLocalStorage } from "usehooks-ts";
 import type { DailyGoalItem } from "../types";
+import { formatDate, formatDisplayDate } from "../utils";
 import { LogsDialog } from "./logs-dialog";
 import { ConfigureDialog } from "./settings-dialog";
 
@@ -17,34 +18,10 @@ const defaultTodos: DailyGoalItem[] = [
   { id: 3, text: "Plan next sprint", completedDates: [] },
 ];
 
-const chipDateFormat = new Intl.DateTimeFormat(undefined, {
-  month: "short",
-  day: "numeric",
-});
-
-function formatDate(date: Date) {
-  return date.toISOString().split("T")[0];
-}
-
 function getDateDaysAgo(daysAgo: number) {
   const date = new Date();
   date.setDate(date.getDate() - daysAgo);
   return formatDate(date);
-}
-
-function formatDisplayDate(dateString: string) {
-  const date = new Date(dateString + "T00:00:00");
-  const today = new Date();
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-
-  if (formatDate(date) === formatDate(today)) {
-    return "Today";
-  } else if (formatDate(date) === formatDate(yesterday)) {
-    return "Yesterday";
-  } else {
-    return chipDateFormat.format(date);
-  }
 }
 
 export function ChecklistCard() {

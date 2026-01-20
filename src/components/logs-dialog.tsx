@@ -16,14 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import type { DailyGoalItem } from "../types";
-
-const dateFormat = new Intl.DateTimeFormat(undefined, {
-  dateStyle: "medium",
-});
-
-function formatDisplayDate(dateString: string) {
-  return dateFormat.format(new Date(dateString + "T00:00:00"));
-}
+import { formatDisplayDate } from "../utils";
 
 export interface LogsDialogProps {
   todos: DailyGoalItem[];
